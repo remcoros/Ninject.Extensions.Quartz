@@ -59,7 +59,7 @@ namespace Ninject.Extensions.Quartz
 		/// </summary>
 		public void ReturnJob(IJob job)
 		{
-			
+		    _kernel.Release(job);
 		}
 	}
 }
