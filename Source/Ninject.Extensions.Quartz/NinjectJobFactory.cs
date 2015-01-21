@@ -5,7 +5,6 @@
 // Licensed under the MIT license.
 using System;
 using System.Globalization;
-using Common.Logging;
 using Quartz;
 using Quartz.Spi;
 
@@ -14,8 +13,6 @@ namespace Ninject.Extensions.Quartz
 	public class NinjectJobFactory : IJobFactory
 	{
 		private readonly IKernel _kernel;
-
-		private static readonly ILog log = LogManager.GetLogger(typeof(NinjectJobFactory));
 
 		public NinjectJobFactory(IKernel kernel)
 		{
@@ -47,11 +44,6 @@ namespace Ninject.Extensions.Quartz
 			Type jobType = jobDetail.JobType;
 			try
 			{
-				if (log.IsDebugEnabled)
-				{
-					log.Debug(string.Format(CultureInfo.InvariantCulture, "Producing instance of Job '{0}', class={1}", jobDetail.Key, jobType.FullName));
-				}
-
 				return _kernel.Get(jobType) as IJob;
 			}
 			catch (Exception e)
